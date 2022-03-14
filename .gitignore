@@ -49,3 +49,6 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+#tests
+test/config.inc
