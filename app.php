@@ -74,7 +74,13 @@ $f3->route('GET /cas/serviceValidate', function($f3) {
         echo View::instance()->render('error.xml.php', 'text/plain');
         return;
     }
-    $xml = (object)(array) new SimpleXMLElement($raw_xml);
+    libxml_use_internal_errors(true);
+    $xml = (object) (array) simplexml_load_string($raw_xml);
+    if (libxml_get_errors()){
+        $f3->set('xml', "Error handling xml : ".$raw_xml);
+        echo View::instance()->render('error.xml.php', 'text/plain');
+        return;
+    }
     if (!isset($xml->cas_authenticationSuccess)) {
         $f3->set('xml', str_replace($cas_ticket, $full_ticket, $raw_xml));
         echo View::instance()->render('error.xml.php', 'text/plain');
@@ -96,9 +102,15 @@ $f3->route('GET /cas/serviceValidate', function($f3) {
        return;
     }
     $raw_api_xml = str_replace('cas:', 'cas_', $raw_api_xml);
-    
-    $api_xml = new SimpleXMLElement($raw_api_xml);
-    
+
+    libxml_use_internal_errors(true);
+    $api_xml = (object) (array) simplexml_load_string($raw_api_xml);
+    if (libxml_get_errors()){
+        $f3->set('xml', "Error handling xml : ".$raw_api_xml);
+        echo View::instance()->render('error.xml.php', 'text/plain');
+        return;
+    }
+
     $xml->cas_authenticationSuccess = (object)(array) $xml->cas_authenticationSuccess;
     $xml->cas_authenticationSuccess->cas_attributes = (object)(array) $xml->cas_authenticationSuccess->cas_attributes;
     $xml->cas_authenticationSuccess->cas_entities = (object)(array) $api_xml;
