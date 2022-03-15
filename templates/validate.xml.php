@@ -8,13 +8,24 @@ function recursive_print($xml, $i = 0) {
     }
     foreach((array)$xml as $k => $v) {
         $k = str_replace('cas_', 'cas:', $k);
-        echo "<$k>";
+        $k = preg_replace('/_[0-9]+$/', '', $k);
         if (in_array(gettype($v), array('array', 'object'))) {
-            recursive_print($v, $i++);
+            if (is_array($v) && (array_keys($v)[0] == 0)) {
+                    foreach($v as $a) {
+                        echo "<$k>\n";
+                        recursive_print($a, $i++);
+                        echo "</$k>\n";
+                    }
+            }else {
+                echo "<$k>\n";
+                recursive_print($v, $i++);
+                echo "</$k>\n";
+            }
         }else{
-            echo $v;
+            echo "<$k>";
+            echo htmlentities($v);
+            echo "</$k>\n";
         }
-        echo "</$k>\n";
     }
 }
 

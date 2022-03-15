@@ -1,0 +1,10 @@
+<?php 
+$services = array(
+    'localhost' => array(
+        "service_humanname" => "Service Local",
+        "cas_service" => "http://localhost/cas/login?service=%service%",
+        "cas_validator" => "http://localhost/cas/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://localhost/viticonnect/api/%login%/%epoch%/%md5%",
+        "api_secret" => "SECRET"
+    )
+);
