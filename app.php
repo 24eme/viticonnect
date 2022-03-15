@@ -19,7 +19,7 @@ $f3->route('GET /', function($f3) {
         if ($f3->exists('GET.service')) {
             $service = '?service='.$f3->get('GET.service');
         }
-        $f->reroute('/cas/login'.$service);
+        $f3->reroute('/cas/login'.$service);
     });
 $f3->route('GET /cas/login', function($f3) {
         $cases = $f3->get('services');
