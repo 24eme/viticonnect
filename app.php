@@ -63,6 +63,11 @@ $f3->route('GET /cas/serviceValidate', function($f3) {
     $internal_service = $f3->get('urlbase')."/callback/".base64_encode($service)."/".$cas_name;
     $validator_url = str_replace('%ticket%', $cas_ticket, str_replace('%service%', $internal_service, $cases[$cas_name]['cas_validator']));
     $raw_xml = file_get_contents($validator_url);
+    if (!$raw_xml) {
+        $f3->set('xml', 'CAS ERROR ('.$validator_url.')');
+       echo View::instance()->render('error.xml.php', 'text/plain');
+       return;
+    }
     $raw_xml = str_replace('cas:', 'cas_', $raw_xml);
     if (!strpos($raw_xml, 'cas_authenticationSuccess')) {
         $f3->set('xml', str_replace($cas_ticket, $full_ticket, $raw_xml));
@@ -85,6 +90,11 @@ $f3->route('GET /cas/serviceValidate', function($f3) {
     $api_url = str_replace('%md5%', md5($secret."/".$user_id."/".$epoch), $api_url);
 
     $raw_api_xml = file_get_contents($api_url);
+    if (!$raw_api_xml) {
+        $f3->set('xml', 'Viticonnect API ERROR ('.$cases[$cas_name]['api_url'].')');
+       echo View::instance()->render('error.xml.php', 'text/plain');
+       return;
+    }
     $raw_api_xml = str_replace('cas:', 'cas_', $raw_api_xml);
     
     $api_xml = new SimpleXMLElement($raw_api_xml);
