@@ -62,7 +62,7 @@ $f3->route('POST /cas/login', function($f3) {
 
 $f3->route('GET /callback/@callback/@origin', function($f3) {
         $service = base64_decode($f3->get('PARAMS.callback'));
-        $ticket = $f3->get('GET.ticket').'%origin:'.$f3->get('PARAMS.origin');
+        $ticket = $f3->get('GET.ticket').'%origin:'.$f3->get('PARAMS.origin').'-viticonnect';
         $f3->set('SESSION.origin', $f3->get('PARAMS.origin'));
         $f3->set('SESSION.ticket', $f3->get('GET.ticket'));
         $sep = '?';
@@ -96,7 +96,7 @@ $f3->route('GET /cas/serviceValidate', function($f3) {
     $full_ticket = $f3->get('GET.ticket');
     $pos = strpos($full_ticket, '%origin:');
     $cas_ticket = substr($full_ticket, 0, $pos);
-    $cas_name = substr($full_ticket, $pos + 8);
+    $cas_name = str_replace('-viticonnect', '', substr($full_ticket, $pos + 8));
     $internal_service = $f3->get('urlbase')."/callback/".base64_encode($service)."/".$cas_name;
     $validator_url = str_replace('%ticket%', $cas_ticket, str_replace('%service%', $internal_service, $cases[$cas_name]['cas_validator']));
     $raw_xml = file_get_contents($validator_url);
