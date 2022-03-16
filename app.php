@@ -35,12 +35,12 @@ $f3->route('GET /cas/login', function($f3) {
         }
         $f3->set('service', $service);
         $f3->set('servicename', preg_replace('/https?:..(www\.)?([^\/]*)\/.*/', '\2', $service));
-        $f3->set('template', 'login.html.php');
         if ($f3->exists('GET.auto') && $f3->get('GET.auto')) {
-            $service = str_replace('%service%', str_replace('%servicename%', $f3->get('GET.auto'), $f3->get('callback')),  $cases[$f3->get('GET.auto')]['cas_service']);
+            $service = str_replace('%service%', str_replace('%servicename%', $f3->get('GET.auto'), $f3->get('callback')),  $cases[$f3->get('GET.auto')]['cas_login']);
             $f3->reroute($service);
         }
         $f3->set('cases', $cases);
+        $f3->set('template', 'login.html.php');
         echo View::instance()->render('layout.html.php');
 });
 
@@ -49,18 +49,32 @@ $f3->route('POST /cas/login', function($f3) {
     $service = $f3->get('POST.service');
     $key = $f3->get('POST.cas_choice');
     $callback = $f3->get('urlbase')."/callback/".base64_encode($service)."/%servicename%";
-    $url = str_replace('%service%', str_replace('%servicename%', $key, $callback), $cases[$key]['cas_service']);
+    $url = str_replace('%service%', str_replace('%servicename%', $key, $callback), $cases[$key]['cas_login']);
     return $f3->reroute($url);
 });
 
 $f3->route('GET /callback/@callback/@origin', function($f3) {
         $service = base64_decode($f3->get('PARAMS.callback'));
         $ticket = $f3->get('GET.ticket').'%origin:'.$f3->get('PARAMS.origin');
+        $f3->set('SESSION.origin', $f3->get('PARAMS.origin'));
+        $f3->set('SESSION.ticket', $f3->get('GET.ticket'));
         $sep = '?';
         if (strpos('?', $service) > 0) {
             $sep = '&';
         }
         $f3->reroute($service.$sep.'ticket='.$ticket);
+});
+
+$f3->route('GET /cas/logout', function($f3) {
+    $cases = $f3->get('services');
+    $key = $f3->get('SESSION.origin');
+    $f3->clear('SESSION.origin');
+    $f3->clear('SESSION.ticket');
+    $service = $f3->get('urlbase').'/cas/login';
+    if ($key) {
+        return $f3->reroute(str_replace('%service%', $service, $cases[$key]['cas_logout']));
+    }
+    return $f3->reroute($service);
 });
 
 $f3->route('GET /cas/serviceValidate', function($f3) {
