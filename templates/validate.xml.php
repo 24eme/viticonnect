@@ -23,7 +23,7 @@ function recursive_print($xml, $i = 0) {
             }
         }else{
             echo "<$k>";
-            echo htmlentities($v);
+            echo htmlspecialchars($v, ENT_XML1, 'UTF-8');
             echo "</$k>\n";
         }
     }
