@@ -27,14 +27,24 @@ $f3->route('GET /cas/login', function($f3) {
         if ($f3->exists('GET.service')) {
             $service = $f3->get('GET.service');
         }
+        $f3->set('service', $service);
+        $f3->set('servicename', preg_replace('/https?:..(www\.)?([^\/]*)\/.*/', '\2', $service));
         $f3->set('template', 'login.html.php');
-        $f3->set('callback', $f3->get('urlbase')."/callback/".base64_encode($service)."/%servicename%");
         if ($f3->exists('GET.auto') && $f3->get('GET.auto')) {
             $service = str_replace('%service%', str_replace('%servicename%', $f3->get('GET.auto'), $f3->get('callback')),  $cases[$f3->get('GET.auto')]['cas_service']);
             $f3->reroute($service);
         }
         $f3->set('cases', $cases);
         echo View::instance()->render('layout.html.php');
+});
+
+$f3->route('POST /cas/login', function($f3) {
+    $cases = $f3->get('services');
+    $service = $f3->get('POST.service');
+    $key = $f3->get('POST.cas_choice');
+    $callback = $f3->get('urlbase')."/callback/".base64_encode($service)."/%servicename%";
+    $url = str_replace('%service%', str_replace('%servicename%', $key, $callback), $cases[$key]['cas_service']);
+    return $f3->reroute($url);
 });
 
 $f3->route('GET /callback/@callback/@origin', function($f3) {
