@@ -22,6 +22,12 @@ $f3->route('GET /', function($f3) {
         $f3->reroute('/cas/login'.$service);
     });
 $f3->route('GET /cas/login', function($f3) {
+        if ($f3->exists("SESSION.origin")) {
+            $f3->set('origin', $f3->get("SESSION.origin"));
+            $f3->set('template', 'logged.html.php');
+            echo View::instance()->render('layout.html.php');
+            return;
+        }
         $cases = $f3->get('services');
         $service = $f3->get('urlbase')."/cas/login";
         if ($f3->exists('GET.service')) {
