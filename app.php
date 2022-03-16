@@ -27,12 +27,12 @@ $f3->route('GET /cas/login', function($f3) {
         }
         if ($f3->exists("SESSION.origin")) {
             $f3->set('origin', $f3->get("SESSION.origin"));
-            $f3->set('template', 'logged.html.php');
-            $f3->set('GET.auto', $f3->get('origin'));
             if (!isset($service) || !$service) {
+                $f3->set('template', 'logged.html.php');
                 echo View::instance()->render('layout.html.php');
                 return;
             }
+            $f3->set('GET.auto', $f3->get('origin'));
         }
         $cases = $f3->get('services');
         if (!isset($service) || !$service){
@@ -40,9 +40,10 @@ $f3->route('GET /cas/login', function($f3) {
         }
         $f3->set('service', $service);
         $f3->set('servicename', preg_replace('/https?:..(www\.)?([^\/]*)\/.*/', '\2', $service));
+        $f3->set('callback', $f3->get('urlbase')."/callback/".base64_encode($service)."/%servicename%");
         if ($f3->exists('GET.auto') && $f3->get('GET.auto')) {
             $service = str_replace('%service%', str_replace('%servicename%', $f3->get('GET.auto'), $f3->get('callback')),  $cases[$f3->get('GET.auto')]['cas_login']);
-            $f3->reroute($service);
+            return $f3->reroute($service);
         }
         $f3->set('cases', $cases);
         $f3->set('template', 'login.html.php');
