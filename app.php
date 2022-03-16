@@ -28,11 +28,11 @@ $f3->route('GET /cas/login', function($f3) {
         if ($f3->exists("SESSION.origin")) {
             $f3->set('origin', $f3->get("SESSION.origin"));
             $f3->set('template', 'logged.html.php');
-            if (isset($service) && $service) {
-                return $f3->reroute($service);
+            $f3->set('GET.auto', $f3->get('origin'));
+            if (!isset($service) || !$service) {
+                echo View::instance()->render('layout.html.php');
+                return;
             }
-            echo View::instance()->render('layout.html.php');
-            return;
         }
         $cases = $f3->get('services');
         if (!isset($service) || !$service){
