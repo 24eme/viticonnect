@@ -113,7 +113,11 @@ $f3->route('GET /cas/serviceValidate', function($f3) {
 
     $xml->cas_authenticationSuccess = (object)(array) $xml->cas_authenticationSuccess;
     $xml->cas_authenticationSuccess->cas_attributes = (object)(array) $xml->cas_authenticationSuccess->cas_attributes;
-    $xml->cas_authenticationSuccess->cas_entities = (object)(array) $api_xml;
+    if (isset($api_xml->cas_entity)) {
+           $xml->cas_authenticationSuccess->cas_entities = (object)(array) $api_xml;
+    }else{
+           $xml->cas_authenticationSuccess->cas_entities = (object) array();
+    }
     
     $f3->set('xml', $xml);
     echo View::instance()->render('validate.xml.php', 'text/xml');
