@@ -183,6 +183,7 @@ $f3->route('POST /cas/login', 'VitiConnect->cas_login_post');
 $f3->route('GET /callback/@callback/@origin', 'VitiConnect->callback');
 $f3->route('GET /cas/logout',  'VitiConnect->cas_logout');
 $f3->route('GET /cas/serviceValidate', 'VitiConnect->cas_servicevalidate');
+$f3->route('GET /cas/proxyValidate', 'VitiConnect->cas_servicevalidate');
 $f3->route('GET /test', 'VitiConnect->test');
 
 return $f3;
