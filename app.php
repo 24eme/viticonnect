@@ -19,9 +19,16 @@ class VitiConnect {
             $service = $f3->get('GET.service');
         }
         $f3->set('limits', null);
+        $limit = null;
         if ($f3->exists('GET.limit')) {
+            $limit = $f3->get('GET.limit');
+        }
+        if ($f3->exists('PARAMS.limit')) {
+            $limit = $f3->get('PARAMS.limit');
+        }
+        if ($limit) {
             $limits = array();
-            foreach(explode(',', $f3->get('GET.limit')) as $k) {
+            foreach(explode(',', $limit) as $k) {
                 $limits[$k] = $k;
             }
             $f3->set('limits', $limits);
@@ -192,6 +199,11 @@ $f3->route('GET /callback/@callback/@origin', 'VitiConnect->callback');
 $f3->route('GET /cas/logout',  'VitiConnect->cas_logout');
 $f3->route('GET /cas/serviceValidate', 'VitiConnect->cas_servicevalidate');
 $f3->route('GET /cas/proxyValidate', 'VitiConnect->cas_servicevalidate');
+$f3->route('GET /cas/@limit/login', 'VitiConnect->cas_login_get');
+$f3->route('POST /cas/@limit/login', 'VitiConnect->cas_login_post');
+$f3->route('GET /cas/@limit/logout',  'VitiConnect->cas_logout');
+$f3->route('GET /cas/@limit/serviceValidate', 'VitiConnect->cas_servicevalidate');
+$f3->route('GET /cas/@limit/proxyValidate', 'VitiConnect->cas_servicevalidate');
 $f3->route('GET /test', 'VitiConnect->test');
 
 return $f3;
