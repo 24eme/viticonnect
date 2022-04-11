@@ -52,4 +52,4 @@
 
 #tests
 test/config.inc
-config/*config.php
+config/apisecrets.config.php
