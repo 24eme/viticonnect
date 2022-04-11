@@ -18,6 +18,14 @@ class VitiConnect {
         if ($f3->exists('GET.service')) {
             $service = $f3->get('GET.service');
         }
+        $f3->set('limits', null);
+        if ($f3->exists('GET.limit')) {
+            $limits = array();
+            foreach(explode(',', $f3->get('GET.limit')) as $k) {
+                $limits[$k] = $k;
+            }
+            $f3->set('limits', $limits);
+        }
         if ($f3->exists("SESSION.origin")) {
             $f3->set('origin', $f3->get("SESSION.origin"));
             $f3->set('originname', $cases[$f3->get('origin')]['service_humanname']);
