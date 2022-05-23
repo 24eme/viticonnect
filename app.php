@@ -43,6 +43,9 @@ class VitiConnect {
             }
             $f3->set('GET.auto', $f3->get('origin'));
         }
+        if (isset($service) && $service && $limit && count($limits) == 1) {
+            return $this->redirect2realcas($f3, $limit, $service);
+        }
         if (!isset($service) || !$service){
             $service = $f3->get('urlbase')."/cas/login";
         }
@@ -59,11 +62,15 @@ class VitiConnect {
     }
     
     public function cas_login_post(Base $f3) {
-        $cases = $f3->get('services');
         $service = $f3->get('POST.service');
         $key = $f3->get('POST.cas_choice');
+        return $this->redirect2realcas($f3, $key, $service);
+    }
+    
+    private function redirect2realcas(Base $f3, $caskey, $service) {
+        $cases = $f3->get('services');
         $callback = $f3->get('urlbase')."/callback/".base64_encode($service)."/%servicename%";
-        $url = str_replace('%service%', str_replace('%servicename%', $key, $callback), $cases[$key]['cas_login']);
+        $url = str_replace('%service%', str_replace('%servicename%', $caskey, $callback), $cases[$caskey]['cas_login']);
         return $f3->reroute($url);
     }
     
