@@ -80,7 +80,7 @@ class VitiConnect {
         $f3->set('SESSION.origin', $f3->get('PARAMS.origin'));
         $f3->set('SESSION.ticket', $f3->get('GET.ticket'));
         $sep = '?';
-        if (strpos('?', $service) > 0) {
+        if (strpos($service, '?') > 0) {
             $sep = '&';
         }
         $f3->reroute($service.$sep.'ticket='.$ticket);
