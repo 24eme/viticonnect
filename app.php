@@ -83,7 +83,7 @@ class VitiConnect {
         if (strpos($service, '?') > 0) {
             $sep = '&';
         }
-        $f3->reroute($service.$sep.'ticket='.$ticket);
+        $f3->reroute($service.$sep.'ticket='.urlencode($ticket));
     }
     
     public function cas_logout(Base $f3) {
