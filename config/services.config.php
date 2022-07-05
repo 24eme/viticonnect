@@ -27,6 +27,13 @@ $services = array(
         "cas_logout" => "https://login.syndicat-cotesdeprovence.com/cas/logout?instance=vaucluse&service=%service%",
         "cas_validator" => "https://login.syndicat-cotesdeprovence.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
         "api_url" => "https://declaration.syndicat-cotesdeprovence.com/viticonnect/api/%login%/%epoch%/%md5%",
+    ),
+    "sancerre" => array(
+        "service_humanname" => "Vins du Centre-Loire",
+        "cas_login" => "https://login.vins-centre-loire.com/cas/login?service=%service%",
+        "cas_logout" => "https://login.vins-centre-loire.com/cas/logout?service=%service%",
+        "cas_validator" => "https://login.vins-centre-loire.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://declaration.vins-centre-loire.com/viticonnect/api/%login%/%epoch%/%md5%",
     )
 );
 
