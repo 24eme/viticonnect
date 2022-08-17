@@ -6,7 +6,7 @@
 <form class="form-viticonnect" method="POST">
   <input type="hidden" name="service" value="<?php echo $service; ?>">
   <div class="mb-2">
-  <?php foreach ($cases as $key => $service) : if ($limits && !isset($limits[$key])) continue ; ?>
+  <?php foreach ($cases as $key => $service) : if (($limits && !isset($limits[$key])) || (!isset($service['service_humanname'])) || (!$limits && isset($service['hidden']) && $service['hidden']) ) continue ; ?>
       <button type="submit" class="btn btn-lg btn-light btn-outline-dark" name="cas_choice" value="<?php echo $key; ?>"><?php echo $service['service_humanname']; ?></button>
   <?php endforeach; ?>
   </div>

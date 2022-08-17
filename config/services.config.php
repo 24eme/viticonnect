@@ -34,6 +34,14 @@ $services = array(
         "cas_logout" => "https://login.vins-centre-loire.com/cas/logout?service=%service%",
         "cas_validator" => "https://login.vins-centre-loire.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
         "api_url" => "https://declaration.vins-centre-loire.com/viticonnect/api/%login%/%epoch%/%md5%",
+    ),
+    "test" => array(
+        "service_humanname" => "Test",
+        "cas_login" => "https://test.24eme.fr/cas/login?service=%service%",
+        "cas_logout" => "https://test.24eme.fr/cas/logout?service=%service%",
+        "cas_validator" => "https://test.24eme.fr/cas/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://test.24eme.fr/viticonnect/api.php?login=%login%&epoch=%epoch%?md5=%md5%",
+        "hidden" => true
     )
 );
 
