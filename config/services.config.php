@@ -35,6 +35,14 @@ $services = array(
         "cas_validator" => "https://login.vins-centre-loire.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
         "api_url" => "https://declaration.vins-centre-loire.com/viticonnect/api/%login%/%epoch%/%md5%",
     ),
+    "institutrhodanien" => array(
+        "service_humanname" => "Institut Rhodanien",
+        "cas_login" => "https://login.institut-rhodanien.com/cas/login?service=%service%",
+        "cas_logout" => "https://login.institut-rhodanien.com/cas/logout?service=%service%",
+        "cas_validator" => "https://login.institut-rhodanien.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://login.institut-rhodanien.com/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%",
+        "hidden" => true
+    ),
     "test" => array(
         "service_humanname" => "Test",
         "cas_login" => "https://test.24eme.fr/cas/login?service=%service%",
