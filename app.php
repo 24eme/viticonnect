@@ -203,17 +203,22 @@ $f3->set('urlbase', $f3->get('SCHEME').'://'.$_SERVER['SERVER_NAME'].(!in_array(
 require_once('config/services.config.php');
 $f3->set('services', $services);
 $f3->route('GET /', 'VitiConnect->home');
+
 $f3->route('GET /cas/login', 'VitiConnect->cas_login_get');
 $f3->route('POST /cas/login', 'VitiConnect->cas_login_post');
-$f3->route('GET /callback/@callback/@origin', 'VitiConnect->callback');
 $f3->route('GET /cas/logout',  'VitiConnect->cas_logout');
-$f3->route('GET /cas/serviceValidate', 'VitiConnect->cas_servicevalidate');
-$f3->route('GET /cas/proxyValidate', 'VitiConnect->cas_servicevalidate');
+
 $f3->route('GET /cas/@limit/login', 'VitiConnect->cas_login_get');
 $f3->route('POST /cas/@limit/login', 'VitiConnect->cas_login_post');
 $f3->route('GET /cas/@limit/logout',  'VitiConnect->cas_logout');
+
+$f3->route('GET /callback/@callback/@origin', 'VitiConnect->callback');
+
+$f3->route('GET /cas/serviceValidate', 'VitiConnect->cas_servicevalidate');
+$f3->route('GET /cas/proxyValidate', 'VitiConnect->cas_servicevalidate');
 $f3->route('GET /cas/@limit/serviceValidate', 'VitiConnect->cas_servicevalidate');
 $f3->route('GET /cas/@limit/proxyValidate', 'VitiConnect->cas_servicevalidate');
+
 $f3->route('GET /test', 'VitiConnect->test');
 
 return $f3;
