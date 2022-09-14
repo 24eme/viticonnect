@@ -53,3 +53,7 @@
 #tests
 test/config.inc
 config/apisecrets.config.php
+
+# vim & swap
+*~
+*.swp
