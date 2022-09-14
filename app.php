@@ -91,10 +91,13 @@ class VitiConnect {
         $key = $f3->get('SESSION.origin');
         $f3->clear('SESSION.origin');
         $f3->clear('SESSION.ticket');
-        $service = $f3->get('urlbase').'/cas/login';
+
+        $service = ($f3->get('GET.service')) ? $f3->get('GET.service') : $f3->get('urlbase').'/cas/login';
+
         if ($key) {
             return $f3->reroute(str_replace('%service%', $service, $cases[$key]['cas_logout']));
         }
+
         return $f3->reroute($service);
     }
     
