@@ -141,14 +141,15 @@ class VitiConnect {
             return;
         }
         $user_id = $xml->cas_authenticationSuccess->cas_user;
-        
+
         $api_url = $cases[$cas_name]['api_url'];
         $secret = $cases[$cas_name]['api_secret'];
+        $isExtra = isset($cases[$cas_name]['api_extra']) && in_array(parse_url($service)['host'], $cases[$cas_name]['api_extra']);
         $epoch = time();
         $api_url = str_replace('%epoch%', $epoch, $api_url);
         $api_url = str_replace('%login%', $user_id, $api_url);
+        $api_url = str_replace('%extra%', (int) $isExtra, $api_url);
         $api_url = str_replace('%md5%', md5($secret."/".$user_id."/".$epoch), $api_url);
-        
         $raw_api_xml = file_get_contents($api_url);
         if (!$raw_api_xml) {
             $f3->set('xml', 'Viticonnect API ERROR ('.$cases[$cas_name]['api_url'].')');
