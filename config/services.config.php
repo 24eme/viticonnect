@@ -35,6 +35,13 @@ $services = array(
         "cas_validator" => "https://login.vins-centre-loire.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
         "api_url" => "https://declaration.vins-centre-loire.com/viticonnect/api/%login%/%epoch%/%md5%",
     ),
+    "civa" => array(
+        "service_humanname" => "Vins d'Alsace",
+        "cas_login" => "https://login.vinsalsace.pro/cas/login?service=%service%",
+        "cas_logout" => "https://login.vinsalsace.pro/cas/logout?service=%service%",
+        "cas_validator" => "https://login.vinsalsace.pro/cas/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://declaration.vinsalsace.pro/viticonnect/api/%login%/%epoch%/%md5%"
+    ),
     "institutrhodanien" => array(
         "service_humanname" => "Institut Rhodanien",
         "cas_login" => "https://login.institut-rhodanien.com/cas/login?service=%service%",
