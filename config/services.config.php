@@ -55,7 +55,7 @@ $services = array(
         "cas_login" => "https://test.24eme.fr/cas/login?service=%service%",
         "cas_logout" => "https://test.24eme.fr/cas/logout?service=%service%",
         "cas_validator" => "https://test.24eme.fr/cas/serviceValidate?service=%service%&ticket=%ticket%",
-        "api_url" => "https://test.24eme.fr/viticonnect/api.php?login=%login%&epoch=%epoch%?md5=%md5%",
+        "api_url" => "https://test.24eme.fr/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%",
         "hidden" => true
     )
 );
