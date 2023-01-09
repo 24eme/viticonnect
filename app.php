@@ -51,7 +51,7 @@ class VitiConnect {
         }
         $f3->set('service', $service);
         $f3->set('servicename', preg_replace('/https?:..(www\.)?([^\/]*)\/.*/', '\2', $service));
-        $f3->set('callback', $f3->get('urlbase')."/callback/".base64_encode($service)."/%servicename%");
+        $f3->set('callback', $f3->get('urlbase')."/callback/".$this->base64url_encode($service)."/%servicename%");
         if ($f3->exists('GET.auto') && $f3->get('GET.auto')) {
             $service = str_replace('%service%', str_replace('%servicename%', $f3->get('GET.auto'), $f3->get('callback')),  $cases[$f3->get('GET.auto')]['cas_login']);
             return $f3->reroute($service);
@@ -60,22 +60,32 @@ class VitiConnect {
         $f3->set('template', 'login.html.php');
         echo View::instance()->render('layout.html.php');
     }
-    
+
     public function cas_login_post(Base $f3) {
         $service = $f3->get('POST.service');
         $key = $f3->get('POST.cas_choice');
         return $this->redirect2realcas($f3, $key, $service);
     }
-    
+
     private function redirect2realcas(Base $f3, $caskey, $service) {
         $cases = $f3->get('services');
-        $callback = $f3->get('urlbase')."/callback/".base64_encode($service)."/%servicename%";
+        $callback = $f3->get('urlbase')."/callback/".$this->base64url_encode($service)."/%servicename%";
         $url = str_replace('%service%', str_replace('%servicename%', $caskey, $callback), $cases[$caskey]['cas_login']);
         return $f3->reroute($url);
     }
-    
+
+    private function base64url_encode($data) {
+
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    private function base64url_decode($data) {
+
+        return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+    }
+
     public function callback(Base $f3) {
-        $service = base64_decode($f3->get('PARAMS.callback'));
+        $service = $this->base64url_decode($f3->get('PARAMS.callback'));
         $ticket = $f3->get('GET.ticket').'%origin:'.$f3->get('PARAMS.origin').'-viticonnect';
         $f3->set('SESSION.origin', $f3->get('PARAMS.origin'));
         $f3->set('SESSION.ticket', $f3->get('GET.ticket'));
@@ -114,7 +124,7 @@ class VitiConnect {
         $pos = strpos($full_ticket, '%origin:');
         $cas_ticket = substr($full_ticket, 0, $pos);
         $cas_name = str_replace('-viticonnect', '', substr($full_ticket, $pos + 8));
-        $internal_service = $f3->get('urlbase')."/callback/".base64_encode($service)."/".$cas_name;
+        $internal_service = $f3->get('urlbase')."/callback/".$this->base64url_encode($service)."/".$cas_name;
         $validator_url = str_replace('%ticket%', $cas_ticket, str_replace('%service%', $internal_service, $cases[$cas_name]['cas_validator']));
         $raw_xml = file_get_contents($validator_url);
         if (!$raw_xml) {
