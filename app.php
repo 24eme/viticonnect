@@ -214,6 +214,8 @@ $f3->set('urlbase', $f3->get('SCHEME').'://'.$_SERVER['SERVER_NAME'].(!in_array(
 require_once('config/services.config.php');
 $f3->set('services', $services);
 $f3->route('GET /', 'VitiConnect->home');
+$f3->route('GET /cas', 'VitiConnect->home');
+$f3->route('GET /cas/', 'VitiConnect->home');
 
 $f3->route('GET /cas/login', 'VitiConnect->cas_login_get');
 $f3->route('POST /cas/login', 'VitiConnect->cas_login_post');
