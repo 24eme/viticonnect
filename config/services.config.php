@@ -47,8 +47,7 @@ $services = array(
         "cas_login" => "https://login.institut-rhodanien.com/cas/login?service=%service%",
         "cas_logout" => "https://login.institut-rhodanien.com/cas/logout?service=%service%",
         "cas_validator" => "https://login.institut-rhodanien.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
-        "api_url" => "https://login.institut-rhodanien.com/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%",
-        "hidden" => true
+        "api_url" => "https://login.institut-rhodanien.com/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%"
     ),
     "test" => array(
         "service_humanname" => "Test",
