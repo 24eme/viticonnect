@@ -2,7 +2,7 @@
 
 VitiConnect utilise la technologie [Apereo/CAS](https://www.apereo.org/projects/cas).
 
-Dans cette documentation, nous expliquons le fonctionnement de ce standard ouvert. Le CAS est accessible depuis la base d'url **https://viticonnect.net/cas/**. Ainsi l'url de login générique est (https://viticonnect.net/cas/login)[https://viticonnect.net/cas/login].
+Dans cette documentation, nous expliquons le fonctionnement de ce standard ouvert. Le CAS est accessible depuis la base d'url **https://viticonnect.net/cas/**. Ainsi l'url de login générique est [https://viticonnect.net/cas/login](https://viticonnect.net/cas/login).
 
 Imaginons que l'application cherchant à savoir si un utilisateur est identifié est **site.example.org**. Pour s'authentifier l'utilisateur utilise *http://site.example.org/connexion/*.
 
