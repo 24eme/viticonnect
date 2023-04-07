@@ -185,6 +185,7 @@ class VitiConnect {
         }else{
             $xml->cas_authenticationSuccess->cas_attributes->cas_entities_number = 0;
         }
+        $xml->cas_authenticationSuccess->cas_attributes->{'cas:viticonnect_origin'} = $cas_name;
         $f3->set('xml', $xml);
         echo View::instance()->render('validate.xml.php', 'text/xml');
     }
