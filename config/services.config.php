@@ -56,7 +56,22 @@ $services = array(
         "cas_validator" => "https://test.24eme.fr/cas/serviceValidate?service=%service%&ticket=%ticket%",
         "api_url" => "https://test.24eme.fr/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%",
         "hidden" => true
+    ),
+    "ivso" => array(
+        "service_humanname" => "IVSO",
+        "cas_login" => "https://login.ivsopro.com/cas/login?service=%service%",
+        "cas_logout" => "https://login.ivsopro.com/cas/logout?service=%service%",
+        "cas_validator" => "https://login.ivsopro.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://declaration.ivsopro.com/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%"
+    ),
+    "ivbd" => array(
+        "service_humanname" => "IVBD",
+        "cas_login" => "https://login.ivbdpro.fr/cas_ivbd/login?service=%service%",
+        "cas_logout" => "https://login.ivbdpro.fr/cas_ivbd/logout?service=%service%",
+        "cas_validator" => "https://login.ivbdpro.fr/cas_ivbd/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://declaration.ivbdpro.fr/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%"
     )
+
 );
 
 
