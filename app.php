@@ -141,7 +141,7 @@ class VitiConnect {
         libxml_use_internal_errors(true);
         $xml = (object) (array) simplexml_load_string($raw_xml);
         if (libxml_get_errors()){
-            $f3->set('xml', "Error handling xml : ".$raw_xml);
+            $f3->set('xml', "Error handling xml (".$validator_url.") : ".$raw_xml);
             echo View::instance()->render('error.xml.php', 'text/plain');
             return;
         }
@@ -171,7 +171,7 @@ class VitiConnect {
         libxml_use_internal_errors(true);
         $api_xml = (object) (array) simplexml_load_string($raw_api_xml);
         if (libxml_get_errors()){
-            $f3->set('xml', "Error handling xml : ".$raw_api_xml);
+            $f3->set('xml', "Error handling xml (".$api_url.") : ".$raw_api_xml);
             echo View::instance()->render('error.xml.php', 'text/plain');
             return;
         }
