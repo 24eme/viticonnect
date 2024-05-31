@@ -19,7 +19,7 @@ $services = array(
         "cas_login" => "https://login.igp.vins.24eme.fr/cas_igp/login?instance=igp&service=%service%",
         "cas_logout" => "https://login.igp.vins.24eme.fr/cas_igp/logout?instance=igp&service=%service%",
         "cas_validator" => "https://login.igp.vins.24eme.fr/cas_igp/serviceValidate?service=%service%&ticket=%ticket%",
-        "api_url" => "https://igp.vins.24eme.fr/viticonnect/api/%login%/%epoch%/%md5%",
+        "api_url" => "https://igp.vins.24eme.fr/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%",
     ),
     "odgprovence" => array(
         "service_humanname" => "Syndicat des Côtes de Provence",
