@@ -14,12 +14,12 @@ $services = array(
         "cas_validator" => "https://login.syndicat-cotesdurhone.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
         "api_url" => "https://declaration.syndicat-cotesdurhone.com/viticonnect/api/%login%/%epoch%/%md5%",
     ),
-    "igpvaucluse" => array(
-        "service_humanname" => "Vins IGP Vaucluse",
-        "cas_login" => "https://login.igp.vins.24eme.fr/cas_igp/login?instance=vaucluse&service=%service%",
-        "cas_logout" => "https://login.igp.vins.24eme.fr/cas_igp/logout?instance=vaucluse&service=%service%",
+    "igp" => array(
+        "service_humanname" => "Vins IGP",
+        "cas_login" => "https://login.igp.vins.24eme.fr/cas_igp/login?instance=igp&service=%service%",
+        "cas_logout" => "https://login.igp.vins.24eme.fr/cas_igp/logout?instance=igp&service=%service%",
         "cas_validator" => "https://login.igp.vins.24eme.fr/cas_igp/serviceValidate?service=%service%&ticket=%ticket%",
-        "api_url" => "https://vaucluse.igp.vins.24eme.fr/viticonnect/api/%login%/%epoch%/%md5%",
+        "api_url" => "https://igp.vins.24eme.fr/viticonnect/api/%login%/%epoch%/%md5%",
     ),
     "odgprovence" => array(
         "service_humanname" => "Syndicat des Côtes de Provence",
@@ -29,11 +29,18 @@ $services = array(
         "api_url" => "https://declaration.syndicat-cotesdeprovence.com/viticonnect/api/%login%/%epoch%/%md5%",
     ),
     "sancerre" => array(
-        "service_humanname" => "Vins du Centre-Loire",
+        "service_humanname" => "Vins du Centre-Loire (BIVC)",
         "cas_login" => "https://login.vins-centre-loire.com/cas/login?service=%service%",
         "cas_logout" => "https://login.vins-centre-loire.com/cas/logout?service=%service%",
         "cas_validator" => "https://login.vins-centre-loire.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
         "api_url" => "https://declaration.vins-centre-loire.com/viticonnect/api/%login%/%epoch%/%md5%",
+    ),
+    "odgcentreloire" => array(
+        "service_humanname" => "ODG du Centre-Loire",
+        "cas_login" => "https://login.aoc-centre-loire.fr/cas/login?service=%service%",
+        "cas_logout" => "https://login.aoc-centre-loire.fr/cas/logout?service=%service%",
+        "cas_validator" => "https://login.aoc-centre-loire.fr/cas/serviceValidate?service=%service%&ticket=%ticket%",
+        "api_url" => "https://login.aoc-centre-loire.fr/viticonnect/api/%login%/%epoch%/%md5%",
     ),
     "civa" => array(
         "service_humanname" => "Vins d'Alsace",
@@ -62,14 +69,14 @@ $services = array(
         "cas_login" => "https://login.ivsopro.com/cas/login?service=%service%",
         "cas_logout" => "https://login.ivsopro.com/cas/logout?service=%service%",
         "cas_validator" => "https://login.ivsopro.com/cas/serviceValidate?service=%service%&ticket=%ticket%",
-        "api_url" => "https://declaration.ivsopro.com/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%"
+        "api_url" => "https://declaration.ivsopro.com/viticonnect/api/%login%/%epoch%/%md5%?extra=%extra%"
     ),
     "ivbd" => array(
         "service_humanname" => "IVBD",
         "cas_login" => "https://login.ivbdpro.fr/cas_ivbd/login?service=%service%",
         "cas_logout" => "https://login.ivbdpro.fr/cas_ivbd/logout?service=%service%",
         "cas_validator" => "https://login.ivbdpro.fr/cas_ivbd/serviceValidate?service=%service%&ticket=%ticket%",
-        "api_url" => "https://declaration.ivbdpro.fr/viticonnect/api.php?login=%login%&epoch=%epoch%&md5=%md5%"
+        "api_url" => "https://declaration.ivbdpro.fr/viticonnect/api/%login%/%epoch%/%md5%?extra=%extra%"
     )
 
 );
