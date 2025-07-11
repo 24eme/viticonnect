@@ -79,3 +79,13 @@ Voici un exemple de retour :
     </cas:serviceResponse>
 
 Il se peut que le compte soit lié à plusieurs chais d'une exploitation viticole. C'est pour cette raison que l'API peut retourner plusieurs éléments *entity*.
+
+## Restreindre l'usage de Viticonnect à un ou plusieurs acteurs
+
+Si vous souhaitez utiliser Viticonnect aux utilisateurs d'un seul acteur (une seule interpro, une seule ODG), vous pouvez ajouter dans l'url de connexion que vous fournissez à vos utilisateurs l'acteur concerné entre les chaines "cas" et "login" : https://viticonnect.net/cas/ACTEUR/login?service=https://localhost/.
+
+Ainsi pour limiter l'usage de viticonnect au CIVA, vous pouvez rediriger vos utilisateur vers https://viticonnect.net/cas/civa/login?service=https://localhost
+
+Si vous souhaitez sélectionner plusieurs acteurs, vous pouvez les séparer par des virgules : https://viticonnect.net/cas/civa,declarvins/login?service=https://localhost
+
+Les identifiant des acteurs possibles sont disponibles depuis le fichier [config/services.config.php](../config/services.config.php).
